@@ -1,4 +1,4 @@
-"""Installer for helloworld
+"""Installer for talisker-flask-example
 """
 
 import os
@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='helloworld',
+    name='talisker-flask-example',
     description='An example Hello World Talisker/Flask application',
     long_description=open('README.rst').read(),
     version='1.0.0',

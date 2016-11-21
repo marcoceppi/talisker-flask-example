@@ -1,4 +1,4 @@
-tallisker-flask-example
+talisker-flask-example
 =======================
 
 .. image:: https://travis-ci.org/canonical-ols/talisker-flask-example.svg?branch=master
