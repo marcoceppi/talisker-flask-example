@@ -6,4 +6,4 @@ RUN mkdir -p /srv/helloworld/code
 WORKDIR /srv/helloworld/code
 COPY . /srv/helloworld/code
 RUN pip install -U .
-CMD talisker -b 0.0.0.0:8080 helloworld:app
+CMD talisker --access-logfile=- -b 0.0.0.0:8080 helloworld:app
