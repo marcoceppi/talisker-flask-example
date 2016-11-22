@@ -1,1 +1,5 @@
+# Note: Talisker must come first, otherwise pip can grab the wrong version of
+# other dependencies.
+talisker==0.7.1
+
 Flask==0.11.1
