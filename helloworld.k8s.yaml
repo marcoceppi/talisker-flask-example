@@ -1,0 +1,67 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: helloworld
+  name: helloworld
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helloworld
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - image: docker.io/1stvamp/helloworld:latest
+        imagePullPolicy: ""
+        name: helloworld
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+#            path: /_status/ping
+            path: /
+            port: 8080
+#            httpHeaders:
+#              - name: X-VCS-Revision
+#                value: {template-revision}
+          initialDelaySeconds: 5
+          timeoutSeconds: 30
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: hellworld
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: helloworld-ingress
+spec:
+ rules:
+   - host: helloworld.{HELLOWORLD_SERVICE_HOST}.xip.io
+     http:
+       paths:
+         - path: /
+           backend:
+             serviceName: helloworld
+             servicePort: 80
