@@ -1,7 +1,11 @@
 language: python
 python:
+  - "3.4"
   - "3.5"
-install: pip install -r requirements-devel.txt
+install:
+  - pip install -r requirements-devel.txt
 script:
   - python setup.py develop
-  - py.test
+  - coverage py.test
+after_success:
+  - coveralls
