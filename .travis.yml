@@ -4,8 +4,9 @@ python:
   - "3.5"
 install:
   - pip install -r requirements-devel.txt
+  - pip install coveralls
 script:
   - python setup.py develop
-  - coverage py.test
+  - py.test --cov=helloworld tests/
 after_success:
   - coveralls
