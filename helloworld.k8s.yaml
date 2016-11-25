@@ -51,17 +51,17 @@ spec:
       targetPort: 8080
   selector:
     app: hellworld
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
- name: helloworld-ingress
-spec:
- rules:
-   - host: helloworld.{HELLOWORLD_SERVICE_HOST}.xip.io
-     http:
-       paths:
-         - path: /
-           backend:
-             serviceName: helloworld
-             servicePort: 80
+#---
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+# name: helloworld-ingress
+#spec:
+# rules:
+#   - host: helloworld.napping.io
+#     http:
+#       paths:
+#         - path: /
+#           backend:
+#             serviceName: helloworld
+#             servicePort: 80
