@@ -1,4 +1,5 @@
 from logging import getLogger
+from os import path
 
 from flask import Flask, request
 import talisker
@@ -11,9 +12,13 @@ app = Flask(__name__)
 setup_db(app)
 logger = getLogger(__name__)
 
-# Provide correct X-VCS-Revision value
-with open('version-info.txt') as f:
-    talisker.revision.set(f.read())
+version_info_path = path.join(path.dirname(path.dirname(__file__)),
+                              'version-info.txt')
+
+if path.exists(version_info_path):
+    # Provide correct X-VCS-Revision value
+    with open(version_info_path) as f:
+        talisker.revision.set(f.read())
 
 
 @app.route('/')
