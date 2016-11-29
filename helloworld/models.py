@@ -11,3 +11,11 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+    def jsonify(self):
+        """Return JSONifiable dict"""
+
+        return {
+            'id': self.id,
+            'username': self.username,
+        }

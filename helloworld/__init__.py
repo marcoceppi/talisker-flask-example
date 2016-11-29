@@ -1,7 +1,7 @@
 from logging import getLogger
 from os import path
 
-from flask import Flask, request
+from flask import Flask, jsonify, request
 import talisker
 
 from helloworld.database import db, setup_db
@@ -28,19 +28,19 @@ def hello_world():
 
 
 @app.route('/users/', methods=['POST'])
-def username():
+def add_user():
     user = User(request.form['username'])
     db.session.add(user)
     db.session.commit()
     logger.info('username: {}'.format(request.form['username']))
-    return request.form['username']
+    return jsonify(user.jsonify())
 
 
 @app.route('/users/')
-def usernames():
+def list_users():
     users = User.query.all()
     logger.info('users: {}'.format(users))
-    return str(users)
+    return jsonify(json_list=[u.jsonify() for u in users])
 
 
 def main():
