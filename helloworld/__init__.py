@@ -15,7 +15,7 @@ logger = getLogger(__name__)
 version_info_path = path.join(path.dirname(path.dirname(__file__)),
                               'version-info.txt')
 
-if path.exists(version_info_path):
+if path.exists(version_info_path): # pragma: no cover
     # Provide correct X-VCS-Revision value
     with open(version_info_path) as f:
         talisker.revision.set(f.read())
@@ -44,7 +44,7 @@ def usernames():
 
 
 def main():
-    debug = os.getenv('DEBUG', 'true').lower() == 'true'
+    debug = os.getenv('DEBUG', 'true').lower() == 'true' # pragma: no cover
     app.run(debug=debug, host='0.0.0.0', port=8080)
 
 
