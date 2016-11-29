@@ -1,67 +1,53 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: helloworld
+    version: v1
   name: helloworld
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: helloworld
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: helloworld
     spec:
       containers:
-      - image: docker.io/1stvamp/helloworld:latest
-        imagePullPolicy: ""
+      - image: canonicalols/helloworld:latest
+        imagePullPolicy: Always
         name: helloworld
         ports:
         - containerPort: 8080
+          protocol: TCP
         livenessProbe:
           httpGet:
-#            path: /_status/ping
-            path: /
+            path: /_status/ping
             port: 8080
-#            httpHeaders:
-#              - name: X-VCS-Revision
-#                value: {template-revision}
           initialDelaySeconds: 5
           timeoutSeconds: 30
-        resources: {}
-      restartPolicy: Always
-      serviceAccountName: ""
-status: {}
+        readinessProbe:
+          httpGet:
+            path: /users
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 30
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: helloworld
   labels:
     app: helloworld
+    version: v1
+  name: helloworld
 spec:
   ports:
-    - port: 80
-      protocol: TCP
-      targetPort: 8080
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
   selector:
-    app: hellworld
-#---
-#apiVersion: extensions/v1beta1
-#kind: Ingress
-#metadata:
-# name: helloworld-ingress
-#spec:
-# rules:
-#   - host: helloworld.napping.io
-#     http:
-#       paths:
-#         - path: /
-#           backend:
-#             serviceName: helloworld
-#             servicePort: 80
+    app: helloworld
+  sessionAffinity: None
+  type: LoadBalancer
