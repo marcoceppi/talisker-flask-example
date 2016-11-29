@@ -7,7 +7,7 @@ talisker-flask-example
 .. image:: https://coveralls.io/repos/github/canonical-ols/talisker-flask-example/badge.svg?branch=master&cacheBuster=1
     :target: https://coveralls.io/github/canonical-ols/talisker-flask-example?branch=master
 
-An example Flask app using Tallisker, deployable with Kubernetes.
+An example Flask app using `Tallisker <https://talisker.readthedocs.io/en/latest/>`_, deployable with `Kubernetes <http://kubernetes.io/>`_.
 
 Deployment
 ----------
