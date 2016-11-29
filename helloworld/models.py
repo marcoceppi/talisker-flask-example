@@ -1,4 +1,4 @@
-from helloworld import db
+from helloworld.database import db
 
 class User(db.Model):
     __tablename__ = 'hw_user'

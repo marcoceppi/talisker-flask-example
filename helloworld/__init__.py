@@ -2,11 +2,12 @@ from logging import getLogger
 
 from flask import Flask, request
 
-from helloworld.db import wrap_with_connection
+from helloworld.database import db, setup_db
 from helloworld.models import User
 
 
 app = Flask(__name__)
+setup_db(app)
 logger = getLogger(__name__)
 
 
@@ -17,8 +18,7 @@ def hello_world():
 
 
 @app.route('/users/', methods=['POST'])
-@wrap_with_connection(app)
-def username(db):
+def username():
     user = User(request.form['username'])
     db.session.add(user)
     db.session.commit()
@@ -27,8 +27,7 @@ def username(db):
 
 
 @app.route('/users/')
-@wrap_with_connection(app)
-def usernames(db):
+def usernames():
     users = User.query.all()
     logger.info('users: {}'.format(users))
     return str(users)
