@@ -12,7 +12,7 @@ script:
 after_success:
   - coveralls
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    git rev-parse HEAD > version-info.txt
+    git rev-parse HEAD > version-info.txt ;
     docker build -t canonicalols/helloworld . ;
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" ;
     docker push canonicalols/helloworld ;
