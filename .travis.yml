@@ -12,8 +12,7 @@ script:
 after_success:
   - coveralls
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker build -t canonicalols/helloworld .
-    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push canonicalols/helloworld;
+    docker build -t canonicalols/helloworld . ;
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" ;
+    docker push canonicalols/helloworld ;
     fi
-  - echo "$TRAVIS_BRANCH"
