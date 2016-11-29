@@ -1,11 +1,4 @@
-from pytest import fixture
-from helloworld import app
-
-
-@fixture(scope='session')
-def client():
-    app.config['TESTING'] = True
-    return app.test_client()
+from hw_fixtures import *
 
 
 def test_hello_from_base_url(client):

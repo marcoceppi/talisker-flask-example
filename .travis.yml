@@ -1,3 +1,6 @@
+sudo: required
+services:
+  - docker
 language: python
 python:
   - "3.4"
@@ -10,3 +13,8 @@ script:
   - py.test --cov=helloworld tests/
 after_success:
   - coveralls
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker build -t canonicalols/helloworld .
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push canonicalols/helloworld;
+    fi
