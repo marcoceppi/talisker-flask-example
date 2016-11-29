@@ -1,6 +1,7 @@
 from logging import getLogger
 
 from flask import Flask, request
+import talisker
 
 from helloworld.database import db, setup_db
 from helloworld.models import User
@@ -9,6 +10,10 @@ from helloworld.models import User
 app = Flask(__name__)
 setup_db(app)
 logger = getLogger(__name__)
+
+# Provide correct X-VCS-Revision value
+with open('version-info.txt') as f:
+    talisker.revision.set(f.read())
 
 
 @app.route('/')
