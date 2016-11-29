@@ -2,9 +2,7 @@ sudo: required
 services:
   - docker
 language: python
-python:
-  - "3.4"
-  - "3.5"
+python: "3.5"
 install:
   - pip install -r requirements-devel.txt
   - pip install coveralls
@@ -18,3 +16,4 @@ after_success:
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push canonicalols/helloworld;
     fi
+  - echo "$TRAVIS_BRANCH"
